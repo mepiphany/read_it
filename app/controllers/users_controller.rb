@@ -9,10 +9,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(users_params)
+    @user = User.new(user_params)
     if @user.save
       redirect_to root_path, notice: "User Created!"
     else
+      flash[:alert] = "User wasn't Created!"
       render :new
     end
   end
@@ -24,9 +25,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(users_params)
+    if @user.update(user_params)
       redirect_to root_path, notice: "User Updated"
     else
+      flash[:alert] = "User wasn't Updated!"
       render :edit
     end
   end
@@ -36,7 +38,7 @@ class UsersController < ApplicationController
 
   private
 
-  def users_params
+  def user_params
     params.require(:user).permit([:email, :password, :password_confirmation])
   end
 
