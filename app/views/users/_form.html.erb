@@ -1,5 +1,7 @@
 <h1>Sign up</h1>
-
+<%= @user.errors.full_messages.join(", ") %>
+<br>
+<br>
 <%= form_for @user do |f| %>
   <%= f.label :email %>
   <%= f.text_field :email %>
