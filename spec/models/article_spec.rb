@@ -10,10 +10,10 @@ RSpec.describe Article, type: :model do
       expect(article_valid).to eq(false)
     end
 
-     it "doesn't allow creating a article with no body" do
-       article = Article.new(title: "hello", body: nil)
-       article_valid = article.valid?
-       expect(article_valid).to eq(false)
-     end
+    it "doesn't allow creating a article with no body" do
+      article = Article.new(title: "hello", body: nil)
+      article_valid = article.valid?
+      expect(article_valid).to eq(false)
+    end
   end
 end

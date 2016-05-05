@@ -10,24 +10,8 @@ RSpec.describe ArticlesController, type: :controller do
     it "loads all of the article into @articles" do
       article = Article.create(title: "aritcle_test", body: "article_body")
       article_1 = Article.create(title: "aritcle_test", body: "article_body")
-
       get :index
-
       expect(assigns(:articles)).to eq([article, article_1])
-    end
-  end
-
-  describe "#new" do
-    it "renders new page" do
-      get :new
-      expect(response).to render_template(:new)
-    end
-    it "instantiate new article object and assign it to @article" do
-      article = Article.create(title: "title_test", body: "body_test")
-
-      get :new
-      expect(assigns(:article)).to be_a_new(Article)
-      binding.pry
     end
   end
 
@@ -119,13 +103,13 @@ RSpec.describe ArticlesController, type: :controller do
         article = Article.create(title: "update_test", body: "update_body")
         patch :update, id: article.id, article: {title: "updated!"}
         expect(article.reload.title).to eq("updated!")
-    end
+      end
       it "redirect_to show page" do
         article = Article.create(title: "update_test", body: "update_body")
         patch :update, id: article.id, article: {title: "updated!"}
         article = article.reload
         expect(response).to redirect_to(article_path(article))
-    end
+      end
       it "display flash notice" do
         article = Article.create(title: "update_test", body: "update_body")
         patch :update, id: article.id, article: {title: "updated!"}
