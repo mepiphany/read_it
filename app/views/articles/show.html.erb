@@ -3,3 +3,25 @@
 
 <%= link_to "Edit", edit_article_path(@article) %>
 <%= link_to "Delete", article_path(@article), method: :delete %>
+
+
+<% unless @article.comments.empty? %>
+<h1>Comments</h1>
+  <% @article.comments.each do |comment| %>
+  <%= comment.title %>
+  <%= comment.body %>
+  <%= link_to "Delete", article_comment_path(@article, comment), method: :delete, data: {confirm: "are you sure?"}  %>
+  <hr>
+  <% end %>
+<% end %>
+
+<h3>Add Comments</h3>
+<%= form_for [@article, @comment] do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+<br>
+<%= f.label :body %>
+<%= f.text_area :body %>
+<br>
+<%= f.submit %>
+<% end %>
